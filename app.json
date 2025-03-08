@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "CaliNetX",
-    "slug": "CaliNetX",
+    "slug": "calinetx",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,6 +23,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cf8c7eed-bbf2-4b84-9c8f-cab6c4ee32e5"
+      }
     }
   }
 }
