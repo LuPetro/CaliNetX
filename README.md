@@ -1,93 +1,104 @@
 # CaliNetX
 
-Eine umfassende mobile Anwendung für iOS und Android, die speziell auf Calisthenics-Sportler zugeschnitten ist. Die App kombiniert soziale Netzwerk-Funktionalitäten mit Trainings-Tracking und standortbasierten Features.
+A comprehensive mobile application for iOS and Android specifically tailored for calisthenics athletes. The app combines social networking functionality with training tracking and location-based features.
 
 ## Features
 
-- **Feed**: Instagram-ähnlicher Feed zum Teilen von Trainings und Interaktion mit anderen Nutzern
-- **Community**: Überblick über Calisthenics-Vereine, -Gruppen und Veranstaltungen
-- **Training/Workout**: Umfassende Workout-Planung, -Tracking und Fortschrittsverfolgung
-- **Map**: Interaktive Karte mit Calisthenics-Parks und Anlagen
-- **Profile**: Persönliche Profilseite mit Level-System und Aktivitätsübersicht
+- **Feed**: Instagram-like feed for sharing workouts and interacting with other users
+- **Community**: Overview of calisthenics clubs, groups, and events
+- **Training/Workout**: Comprehensive workout planning, tracking, and progress monitoring
+- **Map**: Interactive map showing calisthenics parks and facilities
+- **Profile**: Personal profile page with level system and activity overview
 
-## Technologie-Stack
+## Technology Stack
 
-- **Frontend**: React Native mit Expo
+- **Frontend**: React Native with Expo
 - **Backend**: Supabase (PostgreSQL)
-- **Authentifizierung**: Supabase Auth
-- **Speicher**: Supabase Storage
-- **API**: RESTful mit Supabase-Client
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage
+- **API**: RESTful with Supabase client
 
-## Entwicklungsumgebung einrichten
+## Setting Up the Development Environment
 
-### Voraussetzungen
+### Prerequisites
 
 - Node.js >= 16
-- npm oder yarn
+- npm or yarn
 - Expo CLI
 - Git
 
 ### Installation
 
-1. Klone das Repository:
+1. Clone the repository:
    ```
    git clone https://github.com/username/calisthenics-community-app.git
    cd calisthenics-community-app
    ```
 
-2. Installiere die Abhängigkeiten:
+2. Install dependencies:
    ```
    npm install
    ```
 
-3. Erstelle eine `.env`-Datei im Stammverzeichnis mit den folgenden Variablen:
+3. Create a `.env` file in the root directory with the following variables:
    ```
-   EXPO_PUBLIC_SUPABASE_URL=deine-supabase-url
-   EXPO_PUBLIC_SUPABASE_ANON_KEY=dein-supabase-anon-key
+   EXPO_PUBLIC_SUPABASE_URL=your-supabase-url
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
    ```
 
-4. Starte die Entwicklungsumgebung:
+4. Start the development environment:
    ```
    npm start
    ```
 
 ### Tests
 
-Tests ausführen:
+Run tests:
 ```
 npm test
 ```
 
-Linting ausführen:
+Run linting:
 ```
 npm run lint
 ```
 
-## Projektstruktur
+## Project Structure
 
 ```
 src/
-├── components/       # Wiederverwendbare UI-Komponenten
-├── screens/          # Hauptbildschirme der App
-├── navigation/       # Navigation zwischen Screens
-├── services/         # API-Calls und externe Dienste
+├── components/       # Reusable UI components
+├── screens/          # Main app screens
+├── navigation/       # Navigation between screens
+├── services/         # API calls and external services
 ├── hooks/            # Custom React Hooks
-├── utils/            # Hilfsfunktionen
-└── theme/            # Design-System und Styling
+├── utils/            # Helper functions
+└── theme/            # Design system and styling
 ```
 
-## Beitragen
+## Contributing
 
-1. Forke das Repository
-2. Erstelle einen Feature-Branch (`git checkout -b feature/neue-feature`)
-3. Committe deine Änderungen (`git commit -m 'Feature hinzugefügt: XYZ'`)
-4. Pushe zum Branch (`git push origin feature/neue-feature`)
-5. Erstelle einen Pull Request
+We welcome community contributions! Please note that all contributions fall under this project's license terms, and the project owners retain the sole right to decide which contributions to include.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -m 'Add feature: XYZ'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Create a Pull Request
 
 ## CI/CD
 
-Dieses Projekt verwendet GitHub Actions für die kontinuierliche Integration und Bereitstellung. Bei jedem Push und Pull Request werden automatisch Tests ausgeführt und bei erfolgreichen Tests wird die App auf Expo veröffentlicht.
+This project uses GitHub Actions for continuous integration and deployment. Automated tests run on every push and pull request, and successful tests trigger app publication to Expo.
 
-## Lizenz
+## License
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die [LICENSE](LICENSE) Datei für Details.
+This project uses a proprietary license. The source code is publicly viewable, but all rights are reserved.
+
+### Terms of Use
+
+- You may view, fork, and use the code for non-commercial, personal purposes
+- You may submit contributions to the project in the form of pull requests
+- You need explicit written permission from the project owners for any commercial use, distribution, or publication of derivative works
+- The project owners retain all rights to the idea, concept, and CaliNetX brand
+
+© 2025 CaliNetX Team. All rights reserved.

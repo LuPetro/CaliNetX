@@ -1,21 +1,43 @@
-MIT License
+# Proprietary License
 
-Copyright (c) 2025 LuPetro
+Copyright (c) 2025 CaliNetX Team. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Definitions
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- "Project Owners" refers to the developers and owners of the CaliNetX project.
+- "Source Code" refers to all program code in the CaliNetX project.
+- "Contribution" refers to any addition, modification, or extension to the Source Code.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## Usage Rights
+
+1. **Viewing and Personal Use**  
+   The Source Code may be viewed, downloaded, and used for private, non-commercial purposes.
+
+2. **Modifications**  
+   You may modify the Source Code for personal, non-commercial purposes.
+
+3. **Contributions**  
+   You may submit contributions to the project in the form of pull requests. By submitting a contribution, you agree to transfer the copyright of your contribution to the Project Owners.
+
+## Restrictions
+
+1. **Commercial Use**  
+   Any commercial use, including but not limited to selling, licensing, or incorporating into commercial products or services, is prohibited without explicit written permission from the Project Owners.
+
+2. **Publication and Distribution**  
+   Publishing or distributing the Source Code or derivative works is prohibited without explicit written permission from the Project Owners.
+
+3. **Trademark Rights**  
+   All rights to names, logos, and other trademarks related to CaliNetX are the exclusive property of the Project Owners.
+
+## Disclaimer
+
+THE SOURCE CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+## Termination
+
+This license automatically terminates if you violate any of the conditions stated above. Upon termination, you must cease all use, reproduction, or distribution of the Source Code.
+
+## Contact
+
+For licensing inquiries or permissions, please contact: lukamatej17@gmail.com
