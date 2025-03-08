@@ -1,16 +1,21 @@
+// jest.config.js
 module.exports = {
     preset: 'jest-expo',
     transformIgnorePatterns: [
-      'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
+      'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-paper)',
     ],
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-    setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+    setupFilesAfterEnv: ['./jest.setup.js'],
     collectCoverage: true,
     collectCoverageFrom: [
-      '**/*.{ts,tsx}',
-      '!**/coverage/**',
+      'src/**/*.{ts,tsx}',
       '!**/node_modules/**',
-      '!**/babel.config.js',
-      '!**/jest.setup.js',
+      '!src/**/*.d.ts',
     ],
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+    testMatch: [
+      '**/__tests__/**/*.[jt]s?(x)',
+      '**/?(*.)+(spec|test).[jt]s?(x)'
+    ],
+    testPathIgnorePatterns: ['/node_modules/'],
+    verbose: true,
   };

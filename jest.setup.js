@@ -1,40 +1,27 @@
+// jest.setup.js
 import 'react-native-gesture-handler/jestSetup';
 
-// Mock für Expo Secure Store
+// Grundlegende Mocks für externe Module
 jest.mock('expo-secure-store', () => ({
   getItemAsync: jest.fn(),
   setItemAsync: jest.fn(),
   deleteItemAsync: jest.fn(),
 }));
 
-// Mock für React Navigation
-jest.mock('@react-navigation/native', () => {
-  const actualNav = jest.requireActual('@react-navigation/native');
-  return {
-    ...actualNav,
-    useNavigation: () => ({
-      navigate: jest.fn(),
-      goBack: jest.fn(),
-    }),
-  };
-});
-
-// Supabase Mock
+// Mock für Supabase
 jest.mock('@supabase/supabase-js', () => {
-  const authMock = {
-    signUp: jest.fn(),
-    signInWithPassword: jest.fn(),
-    signOut: jest.fn(),
-    getUser: jest.fn(),
-    getSession: jest.fn(),
-    onAuthStateChange: jest.fn(() => ({
-      data: { subscription: { unsubscribe: jest.fn() } },
-    })),
-  };
-
   return {
     createClient: jest.fn(() => ({
-      auth: authMock,
+      auth: {
+        signUp: jest.fn(),
+        signInWithPassword: jest.fn(),
+        signOut: jest.fn(),
+        getUser: jest.fn(),
+        getSession: jest.fn(),
+        onAuthStateChange: jest.fn(() => ({
+          data: { subscription: { unsubscribe: jest.fn() } },
+        })),
+      },
       from: jest.fn(() => ({
         select: jest.fn(() => ({
           eq: jest.fn(() => ({
@@ -46,3 +33,14 @@ jest.mock('@supabase/supabase-js', () => {
     })),
   };
 });
+
+// Mock für React Native Paper (minimal)
+jest.mock('react-native-paper', () => {
+  return {
+    // Leerer Mock - nur um Fehler zu vermeiden
+  };
+});
+
+// Verhindere Konsolenausgaben in Tests
+jest.spyOn(console, 'error').mockImplementation(() => {});
+jest.spyOn(console, 'warn').mockImplementation(() => {});
