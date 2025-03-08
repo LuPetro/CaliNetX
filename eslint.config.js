@@ -1,8 +1,8 @@
-// eslint.config.js
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import jestPlugin from 'eslint-plugin-jest';
 
 export default [
   js.configs.recommended,
@@ -16,13 +16,16 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      ecmaFeatures: {
-        jsx: true,
-      },
       parser: tseslint.parser,
       parserOptions: {
         project: './tsconfig.json',
+        ecmaFeatures: {
+          jsx: true
+        }
       },
+      globals: {
+        JSX: true
+      }
     },
     rules: {
       'react/prop-types': 'off',
@@ -38,13 +41,35 @@ export default [
       },
     },
   },
+  // Separate configuration for Jest files
+  {
+    files: ['**/*.test.{js,jsx,ts,tsx}', 'jest.setup.js', 'jest.config.js'],
+    plugins: {
+      jest: jestPlugin
+    },
+    languageOptions: {
+      globals: {
+        jest: true,
+        describe: true,
+        it: true,
+        expect: true,
+        beforeEach: true,
+        afterEach: true,
+        beforeAll: true,
+        afterAll: true,
+        console: true
+      }
+    },
+    rules: {
+      'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'off'
+    }
+  },
   {
     ignores: [
       'node_modules/', 
       'babel.config.js', 
       'metro.config.js', 
-      'jest.config.js',
-      '.eslintrc.js', // Falls noch vorhanden
       'dist/',
       '.expo/'
     ],

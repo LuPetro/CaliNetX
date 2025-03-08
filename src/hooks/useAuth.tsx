@@ -86,31 +86,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Login function
   const login = async (email: string, password: string) => {
-    try {
-      await signIn(email, password);
-    } catch (error) {
-      throw error;
-    }
+    await signIn(email,password);
   };
 
   // Register function
   const register = async (email: string, password: string, username: string) => {
-    try {
-      await signUp(email, password, username);
-    } catch (error) {
-      throw error;
-    }
+    await signUp(email, password, username);
   };
 
   // Logout function
   const logout = async () => {
-    try {
       await signOut();
       setUser(null);
       setSession(null);
-    } catch (error) {
-      throw error;
-    }
   };
 
   return (

@@ -1,5 +1,6 @@
 // src/__tests__/services/supabase.test.ts
 import { supabase, signIn, signUp, signOut, getCurrentUser } from '../../services/supabase';
+import { AuthError } from '@supabase/supabase-js';
 
 // Mock für insert außerhalb definieren, um Zugriff im Test zu haben
 const mockInsert = jest.fn().mockImplementation(() => Promise.resolve({ error: null }));
@@ -71,7 +72,7 @@ describe('Supabase Service', () => {
             user: null, 
             session: null 
           }, 
-          error: error as any  // TypeScript-Cast, um Kompatibilität zu gewährleisten
+          error: error as AuthError
         })
       );
 

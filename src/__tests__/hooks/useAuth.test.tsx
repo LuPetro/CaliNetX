@@ -1,42 +1,64 @@
 // src/__tests__/hooks/useAuth.test.tsx
 import React from 'react';
-import { signIn, signUp, signOut } from '../../services/supabase';
 
-// Mocks für die supabase-Funktionen
+// Erst die Mock-Funktionen erstellen
+const mockSignIn = jest.fn().mockResolvedValue({ 
+  data: { user: { id: 'test-id', email: 'test@example.com' }, session: {} },
+  error: null 
+});
+
+const mockSignUp = jest.fn().mockResolvedValue({ 
+  data: { user: { id: 'test-id', email: 'test@example.com' } },
+  error: null 
+});
+
+const mockSignOut = jest.fn().mockResolvedValue({ error: null });
+
+// Dann die Supabase-Services mocken
 jest.mock('../../services/supabase', () => ({
-    supabase: {
-      auth: {
-        getSession: jest.fn(() => Promise.resolve({ data: { session: null }, error: null })),
-        onAuthStateChange: jest.fn(() => ({
-          data: { subscription: { unsubscribe: jest.fn() } },
-        })),
-      },
+  supabase: {
+    auth: {
+      signInWithPassword: jest.fn().mockResolvedValue({
+        data: { user: { id: 'test-id' }, session: {} },
+        error: null
+      }),
+      signUp: jest.fn().mockResolvedValue({
+        data: { user: { id: 'test-id' } },
+        error: null
+      }),
+      signOut: jest.fn().mockResolvedValue({ error: null }),
+      getSession: jest.fn().mockResolvedValue({ data: { session: null }, error: null }),
+      onAuthStateChange: jest.fn().mockReturnValue({
+        data: { subscription: { unsubscribe: jest.fn() } },
+      }),
     },
-    signIn: jest.fn(),
-    signUp: jest.fn(),
-    signOut: jest.fn(),
-    getCurrentUser: jest.fn(),
-  }));
+  },
+  signIn: mockSignIn,
+  signUp: mockSignUp,
+  signOut: mockSignOut,
+  getCurrentUser: jest.fn().mockResolvedValue({ 
+    id: 'test-id', 
+    email: 'test@example.com', 
+    profile: { username: 'testuser' } 
+  }),
+}));
 
-// Mock für den useAuth-Hook, unter Verwendung der gemockten Funktionen aus supabase
-jest.mock('../../hooks/useAuth', () => {
-    const { signIn, signUp, signOut } = require('../../services/supabase');
-    return {
-      useAuth: jest.fn(() => ({
-        user: null,
-        session: null,
-        loading: false,
-        login: jest.fn((email: string, password: string) => signIn(email, password)),
-        register: jest.fn((email: string, password: string, username: string) => 
-          signUp(email, password, username)
-        ),
-        logout: jest.fn(() => signOut())
-      })),
-      AuthProvider: ({ children }: { children: React.ReactNode }) => children
-    };
-  });
+// Dann den useAuth-Hook mocken
+jest.mock('../../hooks/useAuth', () => ({
+  useAuth: () => ({
+    user: null,
+    session: null,
+    loading: false,
+    login: jest.fn().mockImplementation((email, password) => mockSignIn(email, password)),
+    register: jest.fn().mockImplementation((email, password, username) => 
+      mockSignUp(email, password, username)
+    ),
+    logout: jest.fn().mockImplementation(() => mockSignOut())
+  }),
+  AuthProvider: ({ children }: { children: React.ReactNode }) => children
+}));
 
-// Importiere den gemockten Hook
+// Nach den Mocks können wir die tatsächlichen Funktionen importieren
 import { useAuth } from '../../hooks/useAuth';
 
 describe('useAuth Hook', () => {
@@ -54,7 +76,7 @@ describe('useAuth Hook', () => {
     await login(email, password);
 
     // Assert
-    expect(signIn).toHaveBeenCalledWith(email, password);
+    expect(mockSignIn).toHaveBeenCalledWith(email, password);
   });
 
   it('should call signUp function when register is called', async () => {
@@ -68,7 +90,7 @@ describe('useAuth Hook', () => {
     await register(email, password, username);
 
     // Assert
-    expect(signUp).toHaveBeenCalledWith(email, password, username);
+    expect(mockSignUp).toHaveBeenCalledWith(email, password, username);
   });
 
   it('should call signOut function when logout is called', async () => {
@@ -79,6 +101,6 @@ describe('useAuth Hook', () => {
     await logout();
 
     // Assert
-    expect(signOut).toHaveBeenCalled();
+    expect(mockSignOut).toHaveBeenCalled();
   });
 });
