@@ -46,6 +46,9 @@ jobs:
     
     - name: Install expo-updates
       run: npm install expo-updates
+
+    - name: Install EAS CLI
+      run: npm install -g eas-cli
       
     - name: Setup EAS
       uses: expo/expo-github-action@v8
@@ -53,14 +56,10 @@ jobs:
         eas-version: latest
         token: ${{ secrets.EXPO_TOKEN }}
     
-    - name: Build preview (Web)
-      if: github.event_name == 'pull_request'
-      run: npx expo build:web
-    
     - name: Create EAS update (development)
       if: github.ref == 'refs/heads/develop'
-      run: npx eas update --branch development --message "Update from GitHub CI"
+      run: eas update --branch development --message "Update from GitHub CI"
     
     - name: Create EAS update (production)
       if: github.ref == 'refs/heads/main'
-      run: npx eas update --branch production --message "Update from GitHub CI"
+      run: eas update --branch production --message "Update from GitHub CI"
