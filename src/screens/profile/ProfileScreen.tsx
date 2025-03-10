@@ -1,11 +1,23 @@
 // src/screens/profile/ProfileScreen.tsx
+// Implementierung des Profilscreens mit Logout-Funktionalität
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Button, Avatar, Card, Divider } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, Button, Avatar, Card, Divider, IconButton } from 'react-native-paper';
 import { useAuth } from '../../hooks/useAuth';
+import { StackNavigationProp } from '@react-navigation/stack';
 import theme from '../../theme';
 
-const ProfileScreen: React.FC = () => {
+type ProfileStackParamList = {
+  ProfileHome: undefined;
+  EditProfile: undefined;
+};
+
+type ProfileScreenProps = {
+  navigation: StackNavigationProp<ProfileStackParamList, 'ProfileHome'>;
+};
+
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { user, logout } = useAuth();
 
   const handleLogout = async () => {
@@ -18,8 +30,17 @@ const ProfileScreen: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
       <View style={styles.header}>
+        <View style={styles.profileEditContainer}>
+          <IconButton
+            icon="account-edit"
+            size={24}
+            onPress={() => navigation.navigate('EditProfile')}
+            style={styles.editButton}
+          />
+        </View>
         <Avatar.Image 
           size={80} 
           source={{ uri: user?.profile?.avatar_url || 'https://via.placeholder.com/80' }} 
@@ -63,6 +84,7 @@ const ProfileScreen: React.FC = () => {
         Ausloggen
       </Button>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -71,12 +93,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
+  scrollContainer: {
+    flex: 1,
+  },
   header: {
     alignItems: 'center',
     paddingVertical: theme.spacing.xl,
     backgroundColor: theme.colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.disabled,
+  },
+  profileEditContainer: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1,
+  },
+  editButton: {
+    margin: theme.spacing.s,
   },
   username: {
     fontSize: 22,
