@@ -2,7 +2,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { supabase, getCurrentUser, signIn, signUp, signOut, updateUserProfile, ProfileUpdateData } from '../services/supabase';
 import { Session } from '@supabase/supabase-js';
-import ProfileNavigator from '../navigation/ProfileNavigator';
 
 
 // Define types
