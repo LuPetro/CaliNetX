@@ -1,7 +1,9 @@
 // src/hooks/useAuth.tsx
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { supabase, getCurrentUser, signIn, signUp, signOut } from '../services/supabase';
+import { supabase, getCurrentUser, signIn, signUp, signOut, updateUserProfile, ProfileUpdateData } from '../services/supabase';
 import { Session } from '@supabase/supabase-js';
+import ProfileNavigator from '../navigation/ProfileNavigator';
+
 
 // Define types
 type User = {
@@ -25,6 +27,8 @@ type AuthContextType = {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, username: string) => Promise<void>;
   logout: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
+  updateProfile: (profileData: ProfileUpdateData) => Promise<void>;
 };
 
 // Create the auth context
@@ -101,6 +105,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(null);
   };
 
+  //refreshProfile function
+  const refreshProfile = async () => {
+    if(user?.id) {
+      try{
+        const userData = await getCurrentUser();
+        setUser(userData as User);
+      }
+      catch (error) {
+        console.error('Error refreshing profile:', error);
+      }
+    }
+  };
+
+  // updateProfile function
+  const updateProfile = async (profileData: ProfileUpdateData) => {
+    if(user?.id){
+      await updateUserProfile(user.id, profileData);
+      await refreshProfile();
+    } else {
+      throw new Error('User not authenticated');
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -110,6 +137,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         register,
         logout,
+        refreshProfile,
+        updateProfile
       }}
     >
       {children}

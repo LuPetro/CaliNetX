@@ -101,3 +101,44 @@ export const getCurrentUser = async () => {
   
   return null;
 };
+
+export type ProfileUpdateData = {
+  username?: string;
+  display_name?: string;
+  bio?: string;
+  avatar_url?: string;
+};
+
+export const updateUserProfile = async (userId: string, profileData: ProfileUpdateData) => {
+  // Überprüfen, ob der Benutzername geändert werden soll
+  if (profileData.username) {
+    // Prüfen, ob der Benutzername bereits vergeben ist
+    const { data: existingUser, error: checkError } = await supabase
+      .from('profiles')
+      .select('username')
+      .eq('username', profileData.username)
+      .neq('id', userId)
+      .single();
+    
+    if (checkError && checkError.code !== 'PGRST116') {
+      // PGRST116 bedeutet "keine Zeilen gefunden", was in Ordnung ist
+      throw checkError;
+    }
+    
+    if (existingUser) {
+      throw new Error('Dieser Benutzername ist bereits vergeben.');
+    }
+  }
+  
+  // Profil aktualisieren
+  const { data, error } = await supabase
+    .from('profiles')
+    .update(profileData)
+    .eq('id', userId)
+    .select()
+    .single();
+  
+  if (error) throw error;
+  
+  return data;
+};
