@@ -38,7 +38,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginPress }) => {
     }
 
     if (!isValidPassword(password)) {
-      setErrorMessage('Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben und eine Zahl enthalten.');
+      setErrorMessage('Das Passwort muss mindestens 8 Zeichen lang sein, mindestens einen Buchstaben und eine Zahl enthalten und darf keine Leerzeichen haben.');
       return;
     }
 
