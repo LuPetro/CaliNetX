@@ -19,13 +19,17 @@ describe('Validators', () => {
   describe('isValidPassword', () => {
     it('should return true for valid passwords', () => {
       expect(isValidPassword('Password1')).toBe(true);
-      expect(isValidPassword('Abcdefg1')).toBe(true);
+      expect(isValidPassword('P@ssw0rd')).toBe(true);
+      expect(isValidPassword('helloWorld1!')).toBe(true);
+      expect(isValidPassword('hello_world1')).toBe(true);
     });
 
     it('should return false for invalid passwords', () => {
       expect(isValidPassword('pass')).toBe(false); // zu kurz
       expect(isValidPassword('password')).toBe(false); // keine Zahl
       expect(isValidPassword('12345678')).toBe(false); // kein Buchstabe
+      expect(isValidPassword('!@#$%^&*')).toBe(false); // nur Sonderzeichen
+      expect(isValidPassword('Passwort 123!')).toBe(false); // enthält Leerzeichen
       expect(isValidPassword('')).toBe(false);
     });
   });

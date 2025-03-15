@@ -3,13 +3,13 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FeedScreen from '../screens/feed/FeedScreen';
+import ProfileNavigator from './ProfileNavigator';
 import theme from '../theme';
 
 // Platzhalter für die anderen Screens (wir werden diese später implementieren)
 const CommunityScreen = () => <FeedScreen />;
 const TrainingScreen = () => <FeedScreen />;
 const MapScreen = () => <FeedScreen />;
-const ProfileScreen = () => <FeedScreen />;
 
 export type MainTabParamList = {
   Feed: undefined;
@@ -73,8 +73,9 @@ const MainNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
